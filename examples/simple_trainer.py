@@ -43,7 +43,7 @@ from nerfview import CameraState, RenderTabState, apply_float_colormap
 @dataclass
 class Config:
     # Disable viewer
-    disable_viewer: bool = False
+    disable_viewer: bool = True
     # Path to the .pt files. If provide, it will skip training and run evaluation only.
     ckpt: Optional[List[str]] = None
     # Name of compression strategy to use
@@ -52,11 +52,11 @@ class Config:
     render_traj_path: str = "interp"
 
     # Path to the Mip-NeRF 360 dataset
-    data_dir: str = "data/360_v2/garden"
+    data_dir: str = "/root/autodl-tmp/outputs_colmap/Barn"
     # Downsample factor for the dataset
-    data_factor: int = 4
+    data_factor: int = 1
     # Directory to save results
-    result_dir: str = "results/garden"
+    result_dir: str = "/root/autodl-tmp/results/Barn_sail"
     # Every N images there is a test image
     test_every: int = 8
     # Random crop size for training  (experimental)
@@ -79,13 +79,13 @@ class Config:
     # Number of training steps
     max_steps: int = 30_000
     # Steps to evaluate the model
-    eval_steps: List[int] = field(default_factory=lambda: [7_000, 30_000])
+    eval_steps: List[int] = field(default_factory=lambda: [14_000, 30_000])
     # Steps to save the model
-    save_steps: List[int] = field(default_factory=lambda: [7_000, 30_000])
+    save_steps: List[int] = field(default_factory=lambda: [14_000, 30_000])
     # Whether to save ply file (storage size can be large)
     save_ply: bool = True
     # Steps to save the model as ply
-    ply_steps: List[int] = field(default_factory=lambda: [7_000, 30_000])
+    ply_steps: List[int] = field(default_factory=lambda: [14_000, 30_000])
     # Whether to disable video generation during training and evaluation
     disable_video: bool = False
 
@@ -116,7 +116,7 @@ class Config:
         default_factory=DefaultStrategy
     )
     # Use packed mode for rasterization, this leads to less memory usage but slightly slower.
-    packed: bool = False
+    packed: bool = True
     # Use sparse gradients for optimization. (experimental)
     sparse_grad: bool = False
     # Use visible adam from Taming 3DGS. (experimental)
@@ -146,7 +146,7 @@ class Config:
     scale_reg: float = 0.0
 
     # Enable camera optimization.
-    pose_opt: bool = False
+    pose_opt: bool = True
     # Learning rate for camera optimization
     pose_opt_lr: float = 1e-5
     # Regularization for camera optimization as weight decay
@@ -155,7 +155,7 @@ class Config:
     pose_noise: float = 0.0
 
     # Enable appearance optimization. (experimental)
-    app_opt: bool = False
+    app_opt: bool = True
     # Appearance embedding dimension
     app_embed_dim: int = 16
     # Learning rate for appearance optimization
